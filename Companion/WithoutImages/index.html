@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.css">
 <script src="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
 
-<script src="seedrandom.2.3.1.min.js"></script>
+<script src="../seedrandom.2.3.1.min.js"></script>
 
 <script>
 	//wait for document to be ready.
@@ -15,24 +15,24 @@
 		$("#button-Divide").click(function () {
 			var landRulerIdList = $(".landRulerNum");
 			var numberOfPlayers = $("#slider-numberOfPlayers").val();
-			
+
 			var seed = $("#text-Seed").val();
 			var randomGenerator = new Math.seedrandom(seed);
-			
+
 			//create player numbers list and shuffle it
 			var playerNumbers = new Array(numberOfPlayers);
 			for (var i=0; i < numberOfPlayers; i++) {
 				playerNumbers[i] = i+1;
 			}
 			var shuffledPlayerNumbers = shuffle(playerNumbers, randomGenerator);
-			
+
 			//generate random number list
 			var numberList = new Array(landRulerIdList.length);
 			for (var i=0; i < landRulerIdList.length; i++) {
 				numberList[i] = shuffledPlayerNumbers[i%numberOfPlayers];
 			}
 			numberList = shuffle(numberList, randomGenerator);
-			
+
 			//assign each country a player
 			for (var i=0; i < landRulerIdList.length; i++) {
 				$(landRulerIdList[i]).text(numberList[i]);
@@ -71,13 +71,13 @@
 		<label for="slider-numberOfPlayers">Number of players:</label>
 		<input type="range" name="slider-numberOfPlayers" id="slider-numberOfPlayers" value="6" min="2" max="10">
 	</div>
-	
+
 	<div class="ui-field-contain">
 		<label for="text-Seed">Seed:</label>
 		<input type="text" name="text-Seed" id="text-Seed" value="GoT Owwyea!" />
 	</div>
 	<input type="button" value="Divide" id="button-Divide">
-	
+
 	<ul data-role="listview" data-filter="true" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
 		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The North	</li>
 		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Last Heart	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
@@ -226,7 +226,7 @@
 		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lesser Moraq	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
 		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Isle of Elephants	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
 	</ul>
-	
+
 </body>
 
 </html>

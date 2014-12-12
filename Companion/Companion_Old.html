@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Risk Companion</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+<script src="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+
+<script src="seedrandom.2.3.1.min.js"></script>
+
+<script>
+	//wait for document to be ready.
+	$(document).ready(function(){
+		$("#button-Divide").click(function () {
+			var landRulerIdList = $(".landRulerNum");
+			var numberOfPlayers = $("#slider-numberOfPlayers").val();
+			
+			var seed = $("#text-Seed").val();
+			var randomGenerator = new Math.seedrandom(seed);
+			
+			//create player numbers list and shuffle it
+			var playerNumbers = new Array(numberOfPlayers);
+			for (var i=0; i < numberOfPlayers; i++) {
+				playerNumbers[i] = i+1;
+			}
+			var shuffledPlayerNumbers = shuffle(playerNumbers, randomGenerator);
+			
+			//generate random number list
+			var numberList = new Array(landRulerIdList.length);
+			for (var i=0; i < landRulerIdList.length; i++) {
+				numberList[i] = shuffledPlayerNumbers[i%numberOfPlayers];
+			}
+			numberList = shuffle(numberList, randomGenerator);
+			
+			//assign each country a player
+			for (var i=0; i < landRulerIdList.length; i++) {
+				$(landRulerIdList[i]).text(numberList[i]);
+			}
+		});
+	});
+
+	function shuffle(array, randomGenerator) {
+		var currentIndex = array.length
+		, temporaryValue
+		, randomIndex
+		;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+		// Pick a remaining element...
+		randomIndex = Math.floor(randomGenerator() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+	}
+</script>
+
+</head>
+
+<body>
+
+	<div class="ui-field-contain">
+		<label for="slider-numberOfPlayers">Number of players:</label>
+		<input type="range" name="slider-numberOfPlayers" id="slider-numberOfPlayers" value="6" min="2" max="10">
+	</div>
+	
+	<div class="ui-field-contain">
+		<label for="text-Seed">Seed:</label>
+		<input type="text" name="text-Seed" id="text-Seed" value="GoT Owwyea!" />
+	</div>
+	<input type="button" value="Divide" id="button-Divide">
+	
+	<ul data-role="listview" data-filter="true" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The North	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Last Heart	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Northern Mountains	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Wolfswood	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Winterfell	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Dreadfort	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Grey Cliffs	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Rills	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Barrowlands	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Sheepshead Hills	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Widow's Watch	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	White Harbor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Cape Kraken	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Neck	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Bear Island	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Skagos	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Riverlands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Twins	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Riverrun	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Harrenhal	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The Vale	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Three Sisters	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Fingers	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Eyrie	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Gulltown	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Longbow Hall	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Westerlands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Casterly Rock	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lannisport	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Silverhill	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Iron Islands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lonely Light	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Wyk	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Harlaw	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Pyke	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The Reach	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Roseroad	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Ocean Road	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Highgarden	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Oldtown	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Arbor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Crownlands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Dragonstone	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Kingswood	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Duskendale	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Stormlands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Dornish Marches	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Storm's End	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Tarth	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Rainwood	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Dorne	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Starfall	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Prince's Pass	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaith	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Sunspear	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Stepstones	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Tyrosh	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Bloodstone	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Grey Gallows	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The Disputed Lands	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Disputed Lands	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Myr	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lys	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Rhoyne	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Orange Shore	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Selhorys	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Sorrows	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Flatlands	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Little Rhoyne	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Upper Rhoyne	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Braavos	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Braavosian Coastlands	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Braavos	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Lorath	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lorath	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lorath Bay	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Hills of Norvos	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Norvos	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Axe	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Western Hills	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Qohor Land	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Forest of Qohor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Qohor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Dothraki Territory	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Saath & Morosh	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Khadokh	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	South-West Sarnor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Omber	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Khewo	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Leqse & Yalli Qamayi	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Diaf	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Dothrak	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Efe & Vaes Jini	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Valyrian Freehold	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Northern Ruined City	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Mantarys	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lands of the Long Summer	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Oros	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Valyria	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Eastern Ruined City	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Western Ruined City	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Slaver's Bay	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Tolos & Bhorash	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Yunkai	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Astapor	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Ghozai	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Ghiscar	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Old Ghis	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	New Ghis	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Lhazar	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Hesh	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Kosrak	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lhazosh	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	The Red Waste	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Red Waste	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Shirosi & Vaes Tolorro	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Qosar	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Qarth	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Kingdoms of the Ifeqevron & Ibben	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Ib	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Far Ib	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	New Ibbish	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Vaes Leisi	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Painted Mountains	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Painted Mountains	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Summer Isles	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Walano	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Omboru	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	The Singing Stones	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Isle Of Love	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Jhala	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Naath	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Naath	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">	Sothoryos	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Basilisk Isles	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Skull Island & Ax Isle	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Zamettar & Yeen	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Eastern Sothoryos Mainland	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Wyvern Point	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Eastern Sothoryos Island	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit ui-last-child">	Moraq	</li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Qal	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Faros	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Great Moraq Forest	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Lesser Moraq	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+		<li class="ui-li-static ui-body-inherit ui-li-has-count">	Isle of Elephants	<span class="ui-li-count ui-body-inherit landRulerNum">0</span></li>
+	</ul>
+	
+</body>
+
+</html>

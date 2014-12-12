@@ -1,0 +1,482 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Risk Companion V2</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.css">
+<script src="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="styles.css">
+
+<script src="seedrandom.2.3.1.min.js"></script>
+<script src="purl.js"></script>
+
+<script>
+	var westerosIds = [
+		// WESTEROS
+		//The North
+		"Last-Heart",
+		"Northern-Mountains",
+		"Wolfswood",
+		"Winterfell",
+		"The-Dreadfort",
+		"Grey-Cliffs",
+		"The-Rills",
+		"Barrowlands",
+		"Sheerpshead-Hills",
+		"Widows-Watch",
+		"White-Harbor",
+		"Cape-Kraken",
+		"The-Neck",
+		"Bear-Island",
+		"Skagos",
+		//Riverlands
+		"The-Twins",
+		"Riverrun",
+		"Harrenhal",
+		//The Vale
+		"Three-Sisters",
+		"The-Fingers",
+		"The-Eyrie",
+		"Gulltown",
+		"Longbow-Hall",
+		//Westerlands
+		"Casterly-Rock",
+		"Lannisport",
+		"Silverhill",
+		//Iron Islands
+		"Lonely-Light",
+		"Wyk",
+		"Harlaw",
+		"Pyke",
+		//The Reach
+		"The-Roseroad",
+		"Ocean-Road",
+		"Highgarden",
+		"Oldtown",
+		"The-Arbor",
+		//Crownlands
+		"Dragonstone",
+		"Kingswood",
+		"Duskendale",
+		//Stormlands
+		"Dornish-Marches",
+		"Storms-End",
+		"Tarth",
+		"Rainwood",
+		//Dorne
+		"Starfall",
+		"The-Princes-Pass",
+		"Vaith",
+		"Sunsprear"
+	]
+	var stepstonesIds = [
+		// STEPSTONES
+		"Tyrosh",
+		"Bloodstone",
+		"Grey-Gallows"
+	]
+	var essosIds = [
+		// ESSOS
+		//The Disputed Lands
+		"The-Disputed-Lands",
+		"Myr",
+		"Lys",
+		//Rhoyne
+		"The-Orange-Shore",
+		"Selhorys",
+		"The-Sorrows",
+		"The-Flatlands",
+		"Little-Rhoyne",
+		"Upper-Rhoyne",
+		//Braavos
+		"Braavosian-Coastlands",
+		"Braavos",
+		//Lorath
+		"Lorath",
+		"Lorath-Bay",
+		//Hills of Norvos
+		"Norvos",
+		"The-Axe",
+		"Western-Hills",
+		//Qohor land
+		"Forest-of-Qohor",
+		"Qohor",
+		//Dothraki Territory
+		"Saath-and-Morosh",
+		"Vaes-Khadokh",
+		"South-West-Sarnor",
+		"Omber",
+		"Vaes-Khewo",
+		"Vaes-Leqse-and-Yalli-Qamayi",
+		"Vaes-Diaf",
+		"Vaes-Dothrak",
+		"Vaes-Efe-and-Vaes-Jini",
+		//Valyrian Freehold
+		"Northern-Ruined-City",
+		"Mantarys",
+		"Lands-of-the-Long-Summer",
+		"Oros",
+		"Valyria",
+		"Eastern-Ruined-City",
+		"Western-Ruined-City",
+		//Slaver's Bay
+		"Tolos-and-Bhorash",
+		"Yunkai",
+		"Astapor",
+		"Ghozai",
+		//Ghiscar
+		"Old-Ghis",
+		"New-Ghis",
+		//Lhazar
+		"Hesh",
+		"Kosrak",
+		"Lhazosh",
+		//The Red Waste
+		"The-Red-Waste",
+		"Vaes-Shirosi-and-Vaes-Tolorro",
+		"Vaes-Qosar",
+		"Qarth",
+		//Kingdoms of the Ifeqevron & Ibben
+		"Ib",
+		"Far-Ib",
+		"New-Ibbish",
+		"Vaes-Leisi",
+		
+		// PAINTED MOUNTAINS
+		"Painted-Mountains"
+	]
+	var othersIds = [
+		// OTHER
+		//Summer Isles
+		"Walano",
+		"Omboru",
+		"The-Singing-Stones",
+		"Isle-of-Love",
+		"Jhala",
+		//Naath
+		"Naath",
+		//Sothoryos
+		"Basilisk-Isles",
+		"Skull-Island-and-Ax-Isle",
+		"Zamettar-and-Yeen",
+		"Eastern-Sothoryos-Mainland",
+		"Wyvern-Point",
+		"Eastern-Sothoryos-Island",
+		//Moraq
+		"Qal",
+		"Faros",
+		"Great-Moraq-Forest",
+		"Lesser-Moraq",
+		"Isle-of-Elephants"
+	]
+
+	var currentHightlightedPlayer = -1;
+	var countryOwnerNumbers = [];
+	var unusedIds = [];
+	var usedIds = [];
+
+
+	function highlightLands(playerNumber) {
+		currentHightlightedPlayer = playerNumber;
+
+		if (countryOwnerNumbers.length != usedIds.length) {
+			alert("something went wrong while dividing, can't highlight the lands.");
+		}
+
+		var numberOfLandsForThisPlayer = 0;
+		for (var i=0; i < usedIds.length; ++i) {
+			if (countryOwnerNumbers[i] == playerNumber) {
+				$("#" + usedIds[i]).attr('class', "landMine");
+				++numberOfLandsForThisPlayer;
+			}
+			else if (playerNumber == -1) {
+				$("#" + usedIds[i]).attr('class', "landClear");
+			}
+			else {
+				$("#" + usedIds[i]).attr('class', "landNotMine");
+			}
+		}
+
+		for (var i=0; i < unusedIds.length; ++i) {
+			if (playerNumber == -1) {
+				$("#" + unusedIds[i]).attr('class', "landClear");
+			}
+			else {
+				$("#" + unusedIds[i]).attr('class', "landNotMine");
+			}
+		}
+
+		$("#numberOfLandsIndicator").text(numberOfLandsForThisPlayer);
+	}
+
+	function shuffle(array, randomGenerator) {
+		var currentIndex = array.length
+		, temporaryValue
+		, randomIndex
+		;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+		// Pick a remaining element...
+		randomIndex = Math.floor(randomGenerator() * currentIndex);
+		currentIndex -= 1;
+
+		// And swap it with the current element.
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+		}
+
+		return array;
+	}
+
+	function divide() {
+		//get info from the gui
+		var numberOfPlayers = $("#slider-numberOfPlayers").val();
+		var seed = $("#text-Seed").val();
+		// create random generator with the seed from the gui
+		var randomGenerator = new Math.seedrandom(seed);
+		
+		//create player numbers list and shuffle it
+		var playerNumbers = new Array(numberOfPlayers);
+		for (var i=0; i < numberOfPlayers; i++) {
+			playerNumbers[i] = i+1;
+		}
+		var shuffledPlayerNumbers = shuffle(playerNumbers, randomGenerator);
+		
+		//gather lands
+		usedIds = []; //clear array
+		unusedIds = [];
+		if ($("#Westeros-checkbox").prop("checked") == true)	{ usedIds = usedIds.concat(westerosIds); }
+		else { unusedIds = unusedIds.concat(westerosIds); }
+		if ($("#Stepstones-checkbox").prop("checked") == true)	{ usedIds = usedIds.concat(stepstonesIds); }
+		else { unusedIds = unusedIds.concat(stepstonesIds); }
+		if ($("#Essos-checkbox").prop("checked") == true)		{ usedIds = usedIds.concat(essosIds); }
+		else { unusedIds = unusedIds.concat(essosIds); }
+		if ($("#Others-checkbox").prop("checked") == true)		{ usedIds = usedIds.concat(othersIds); }
+		else { unusedIds = unusedIds.concat(othersIds); }
+
+		countryOwnerNumbers = [];
+		for (var i=0; i < usedIds.length; i++) {
+			countryOwnerNumbers[i] = shuffledPlayerNumbers[i%numberOfPlayers];
+		}
+		countryOwnerNumbers = shuffle(countryOwnerNumbers, randomGenerator);
+
+		//fix the highlighting
+		highlightLands(currentHightlightedPlayer);
+	}
+
+	function rescaleMap() {
+		var scale = ($(document).innerWidth()) / 2362.0;
+		$("#map").css("transform", "scale("+scale+","+scale+")");
+		$("#map").css("-ms-transform", "scale("+scale+","+scale+")");
+		$("#map").css("-webkit-transform", "scale("+scale+","+scale+")");
+	}
+
+	function reloadImage(image) {
+		// Refresh the src attribute, which should make the
+		// browsers reload the iamge.
+		image.src = image.src;
+	}
+
+
+
+	//wait for document to be ready.
+	$(document).ready(function(){
+		rescaleMap();
+
+		var seed = $.url().param("seed");
+		if (seed == undefined) {
+			var currentDate = new Date()
+			seed = currentDate.getDate() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getFullYear();
+		}
+		$("#text-Seed").val(seed);
+
+		//Auto divide on page load
+		divide();
+	});
+
+	$( window ).resize(function() {
+		rescaleMap();
+	});
+</script>
+
+</head>
+
+<body>
+
+	<div class="ui-field-contain">
+		<label for="slider-numberOfPlayers">Number of players:</label>
+		<input type="range" name="slider-numberOfPlayers" id="slider-numberOfPlayers" value="6" min="2" max="10" onchange="divide();" />
+	</div>
+	
+	<div class="ui-field-contain">
+		<label for="text-Seed">Custom seed:<br>(or add "?seed=" to url)</label>
+		<input type="text" name="text-Seed" id="text-Seed" value="Seed" onchange="divide();"/>
+	</div>
+
+	<!--<button onclick="divide();">Divide</button>-->
+
+	<div class="ui-field-contain">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<input type="checkbox" id="Westeros-checkbox" checked="checked" onchange="divide();">
+			<label for="Westeros-checkbox">Westeros</label>
+
+			<input type="checkbox" id="Stepstones-checkbox" checked="checked" onchange="divide();">
+			<label for="Stepstones-checkbox">Stepstones</label>
+
+			<input type="checkbox" id="Essos-checkbox" checked="checked" onchange="divide();">
+			<label for="Essos-checkbox">Essos</label>
+
+			<input type="checkbox" id="Others-checkbox" checked="checked" onchange="divide();">
+			<label for="Others-checkbox">Others</label>
+		</fieldset>
+	</div>
+
+	<div data-role="navbar">
+		<ul>
+			<li class="playerSelectNone"><a class="ui-btn-active" onclick="highlightLands(-1);">Show all</a></li>
+
+			<li class="playerSelect"><a onclick="highlightLands(1);">1</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(2);">2</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(3);">3</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(4);">4</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(5);">5</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(6);">6</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(7);">7</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(8);">8</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(9);">9</a></li>
+			<li class="playerSelect"><a onclick="highlightLands(10);">10</a></li>
+		</ul>
+	</div><!-- /navbar -->
+	
+	<div id="numberOfLandsIndicator"></div>
+
+	<div id="map" class="map">
+		<div style="position: absolute; left: 7px; top: 8px;">			<img 										onerror="reloadImage(this);" src="Cut Images/1.png"										width="2362" height="1772" /></div>
+		<div style="position: absolute; left: 1534px; top: 1114px;">	<img id="Astapor"							onerror="reloadImage(this);" src="Cut Images/Astapor.png"								width="236" height="126" /></div>
+		<div style="position: absolute; left: 362px; top: 276px;">		<img id="Barrowlands"						onerror="reloadImage(this);" src="Cut Images/Barrowlands.png"							width="218" height="144" /></div>
+		<div style="position: absolute; left: 1412px; top: 1521px;">	<img id="Basilisk-Isles"					onerror="reloadImage(this);" src="Cut Images/Basilisk-Isles.png"							width="172" height="145" /></div>
+		<div style="position: absolute; left: 365px; top: 100px;">		<img id="Bear-Island"						onerror="reloadImage(this);" src="Cut Images/Bear-Island.png"							width="68" height="68" /></div>
+		<div style="position: absolute; left: 763px; top: 974px;">		<img id="Bloodstone"						onerror="reloadImage(this);" src="Cut Images/Bloodstone.png"								width="97" height="70" /></div>
+		<div style="position: absolute; left: 860px; top: 476px;">		<img id="Braavos"							onerror="reloadImage(this);" src="Cut Images/Braavos.png"								width="142" height="120" /></div>
+		<div style="position: absolute; left: 859px; top: 519px;">		<img id="Braavosian-Coastlands"				onerror="reloadImage(this);" src="Cut Images/Braavosian-Coastlands.png"					width="60" height="152" /></div>
+		<div style="position: absolute; left: 253px; top: 408px;">		<img id="Cape-Kraken"						onerror="reloadImage(this);" src="Cut Images/Cape-Kraken.png"							width="198" height="110" /></div>
+		<div style="position: absolute; left: 248px; top: 613px;">		<img id="Casterly-Rock"						onerror="reloadImage(this);" src="Cut Images/Casterly-Rock.png"							width="171" height="148" /></div>
+		<div style="position: absolute; left: 440px; top: 889px;">		<img id="Dornish-Marches"					onerror="reloadImage(this);" src="Cut Images/Dornish-Marches.png"						width="199" height="102" /></div>
+		<div style="position: absolute; left: 667px; top: 642px;">		<img id="Dragonstone"						onerror="reloadImage(this);" src="Cut Images/Dragonstone.png"							width="110" height="107" /></div>
+		<div style="position: absolute; left: 559px; top: 680px;">		<img id="Duskendale"						onerror="reloadImage(this);" src="Cut Images/Duskendale.png"								width="130" height="115" /></div>
+		<div style="position: absolute; left: 1401px; top: 1283px;">	<img id="Eastern-Ruined-City"				onerror="reloadImage(this);" src="Cut Images/Eastern-Ruined-City.png"					width="63" height="118" /></div>
+		<div style="position: absolute; left: 1998px; top: 1573px;">	<img id="Eastern-Sothoryos-Island"			onerror="reloadImage(this);" src="Cut Images/Eastern-Sothoryos-Island.png"				width="109" height="129" /></div>
+		<div style="position: absolute; left: 1679px; top: 1565px;">	<img id="Eastern-Sothoryos-Mainland"		onerror="reloadImage(this);" src="Cut Images/Eastern-Sothoryos-Mainland.png"				width="334" height="215" /></div>
+		<div style="position: absolute; left: 2130px; top: 345px;">		<img id="Far-Ib"							onerror="reloadImage(this);" src="Cut Images/Far-Ib.png"									width="97" height="101" /></div>
+		<div style="position: absolute; left: 2077px; top: 1277px;">	<img id="Faros"								onerror="reloadImage(this);" src="Cut Images/Faros.png"									width="180" height="196" /></div>
+		<div style="position: absolute; left: 1181px; top: 622px;">		<img id="Forest-of-Qohor"					onerror="reloadImage(this);" src="Cut Images/Forest-of-Qohor.png"						width="127" height="150" /></div>
+		<div style="position: absolute; left: 1488px; top: 1155px;">	<img id="Ghozai"							onerror="reloadImage(this);" src="Cut Images/Ghozai.png"									width="63" height="63" /></div>
+		<div style="position: absolute; left: 2136px; top: 1401px;">	<img id="Great-Moraq-Forest"				onerror="reloadImage(this);" src="Cut Images/Great-Moraq-Forest.png"						width="147" height="196" /></div>
+		<div style="position: absolute; left: 642px; top: 122px;">		<img id="Grey-Cliffs"						onerror="reloadImage(this);" src="Cut Images/Grey-Cliffs.png"							width="141" height="139" /></div>
+		<div style="position: absolute; left: 780px; top: 1007px;">		<img id="Grey-Gallows"						onerror="reloadImage(this);" src="Cut Images/Grey-Gallows.png"							width="94" height="79" /></div>
+		<div style="position: absolute; left: 627px; top: 588px;">		<img id="Gulltown"							onerror="reloadImage(this);" src="Cut Images/Gulltown.png"								width="182" height="97" /></div>
+		<div style="position: absolute; left: 332px; top: 548px;">		<img id="Harlaw"							onerror="reloadImage(this);" src="Cut Images/Harlaw.png"									width="64" height="68" /></div>
+		<div style="position: absolute; left: 505px; top: 612px;">		<img id="Harrenhal"							onerror="reloadImage(this);" src="Cut Images/Harrenhal.png"								width="168" height="169" /></div>
+		<div style="position: absolute; left: 1738px; top: 966px;">		<img id="Hesh"								onerror="reloadImage(this);" src="Cut Images/Hesh.png"									width="120" height="108" /></div>
+		<div style="position: absolute; left: 377px; top: 821px;">		<img id="Highgarden"						onerror="reloadImage(this);" src="Cut Images/Highgarden.png"								width="215" height="182" /></div>
+		<div style="position: absolute; left: 1883px; top: 181px;">		<img id="Ib"								onerror="reloadImage(this);" src="Cut Images/Ib.png"										width="240" height="237" /></div>
+		<div style="position: absolute; left: 2238px; top: 1615px;">	<img id="Isle-of-Elephants"					onerror="reloadImage(this);" src="Cut Images/Isle-of-Elephants.png"						width="88" height="92" /></div>
+		<div style="position: absolute; left: 751px; top: 1575px;">		<img id="Isle-of-Love"						onerror="reloadImage(this);" src="Cut Images/Isle-of-Love.png"							width="106" height="141" /></div>
+		<div style="position: absolute; left: 824px; top: 1578px;">		<img id="Jhala"								onerror="reloadImage(this);" src="Cut Images/Jhala.png"									width="274" height="202" /></div>
+		<div style="position: absolute; left: 555px; top: 737px;">		<img id="Kingswood"							onerror="reloadImage(this);" src="Cut Images/Kingswood.png"								width="196" height="128" /></div>
+		<div style="position: absolute; left: 1846px; top: 955px;">		<img id="Kosrak"							onerror="reloadImage(this);" src="Cut Images/Kosrak.png"									width="130" height="140" /></div>
+		<div style="position: absolute; left: 1262px; top: 1090px;">	<img id="Lands-of-the-Long-Summer"			onerror="reloadImage(this);" src="Cut Images/Lands-of-the-Long-Summer.png"				width="164" height="170" /></div>
+		<div style="position: absolute; left: 273px; top: 732px;">		<img id="Lannisport"						onerror="reloadImage(this);" src="Cut Images/Lannisport.png"								width="99" height="110" /></div>
+		<div style="position: absolute; left: 559px; top: 103px;">		<img id="Last-Heart"						onerror="reloadImage(this);" src="Cut Images/Last-Heart.png"								width="124" height="125" /></div>
+		<div style="position: absolute; left: 2009px; top: 1432px;">	<img id="Lesser-Moraq"						onerror="reloadImage(this);" src="Cut Images/Lesser-Moraq.png"							width="125" height="148" /></div>
+		<div style="position: absolute; left: 1764px; top: 1053px;">	<img id="Lhazosh"							onerror="reloadImage(this);" src="Cut Images/Lhazosh.png"								width="177" height="177" /></div>
+		<div style="position: absolute; left: 834px; top: 663px;">		<img id="Little-Rhoyne"						onerror="reloadImage(this);" src="Cut Images/Little-Rhoyne.png"							width="188" height="142" /></div>
+		<div style="position: absolute; left: 94px; top: 552px;">		<img id="Lonely-Light"						onerror="reloadImage(this);" src="Cut Images/Lonely-Light.png"							width="66" height="66" /></div>
+		<div style="position: absolute; left: 679px; top: 511px;">		<img id="Longbow-Hall"						onerror="reloadImage(this);" src="Cut Images/Longbow-Hall.png"							width="113" height="89" /></div>
+		<div style="position: absolute; left: 1004px; top: 508px;">		<img id="Lorath"							onerror="reloadImage(this);" src="Cut Images/Lorath.png"									width="66" height="66" /></div>
+		<div style="position: absolute; left: 982px; top: 565px;">		<img id="Lorath-Bay"						onerror="reloadImage(this);" src="Cut Images/Lorath-Bay.png"								width="105" height="66" /></div>
+		<div style="position: absolute; left: 880px; top: 1079px;">		<img id="Lys"								onerror="reloadImage(this);" src="Cut Images/Lys.png"									width="66" height="66" /></div>
+		<div style="position: absolute; left: 1377px; top: 1019px;">	<img id="Mantarys"							onerror="reloadImage(this);" src="Cut Images/Mantarys.png"								width="116" height="114" /></div>
+		<div style="position: absolute; left: 941px; top: 883px;">		<img id="Myr"								onerror="reloadImage(this);" src="Cut Images/Myr.png"									width="104" height="122" /></div>
+		<div style="position: absolute; left: 1255px; top: 1595px;">	<img id="Naath"								onerror="reloadImage(this);" src="Cut Images/Naath.png"									width="87" height="85" /></div>
+		<div style="position: absolute; left: 1635px; top: 1324px;">	<img id="New-Ghis"							onerror="reloadImage(this);" src="Cut Images/New-Ghis.png"								width="73" height="73" /></div>
+		<div style="position: absolute; left: 1926px; top: 440px;">		<img id="New-Ibbish"						onerror="reloadImage(this);" src="Cut Images/New-Ibbish.png"								width="216" height="198" /></div>
+		<div style="position: absolute; left: 439px; top: 104px;">		<img id="Northern-Mountains"				onerror="reloadImage(this);" src="Cut Images/Northern-Mountains.png"						width="140" height="131" /></div>
+		<div style="position: absolute; left: 1278px; top: 1014px;">	<img id="Northern-Ruined-City"				onerror="reloadImage(this);" src="Cut Images/Northern-Ruined-City.png"					width="114" height="142" /></div>
+		<div style="position: absolute; left: 998px; top: 546px;">		<img id="Norvos"							onerror="reloadImage(this);" src="Cut Images/Norvos.png"									width="205" height="248" /></div>
+		<div style="position: absolute; left: 277px; top: 822px;">		<img id="Ocean-Road"						onerror="reloadImage(this);" src="Cut Images/Ocean-Road.png"								width="133" height="134" /></div>
+		<div style="position: absolute; left: 1605px; top: 1206px;">	<img id="Old-Ghis"							onerror="reloadImage(this);" src="Cut Images/Old-Ghis.png"								width="291" height="157" /></div>
+		<div style="position: absolute; left: 261px; top: 926px;">		<img id="Oldtown"							onerror="reloadImage(this);" src="Cut Images/Oldtown.png"								width="135" height="189" /></div>
+		<div style="position: absolute; left: 1422px; top: 547px;">		<img id="Omber"								onerror="reloadImage(this);" src="Cut Images/Omber.png"									width="264" height="246" /></div>
+		<div style="position: absolute; left: 806px; top: 1496px;">		<img id="Omboru"							onerror="reloadImage(this);" src="Cut Images/Omboru.png"									width="185" height="126" /></div>
+		<div style="position: absolute; left: 1356px; top: 1158px;">	<img id="Oros"								onerror="reloadImage(this);" src="Cut Images/Oros.png"									width="125" height="139" /></div>
+		<div style="position: absolute; left: 1304px; top: 948px;">		<img id="Painted-Mountains"					onerror="reloadImage(this);" src="Cut Images/Painted-Mountains.png"						width="337" height="95" /></div>
+		<div style="position: absolute; left: 289px; top: 589px;">		<img id="Pyke"								onerror="reloadImage(this);" src="Cut Images/Pyke.png"									width="66" height="56" /></div>
+		<div style="position: absolute; left: 2167px; top: 1247px;">	<img id="Qal"								onerror="reloadImage(this);" src="Cut Images/Qal.png"									width="66" height="66" /></div>
+		<div style="position: absolute; left: 2090px; top: 1199px;">	<img id="Qarth"								onerror="reloadImage(this);" src="Cut Images/Qarth.png"									width="92" height="86" /></div>
+		<div style="position: absolute; left: 1121px; top: 728px;">		<img id="Qohor"								onerror="reloadImage(this);" src="Cut Images/Qohor.png"									width="180" height="211" /></div>
+		<div style="position: absolute; left: 632px; top: 907px;">		<img id="Rainwood"							onerror="reloadImage(this);" src="Cut Images/Rainwood.png"								width="157" height="97" /></div>
+		<div style="position: absolute; left: 399px; top: 591px;">		<img id="Riverrun"							onerror="reloadImage(this);" src="Cut Images/Riverrun.png"								width="126" height="161" /></div>
+		<div style="position: absolute; left: 1271px; top: 511px;">		<img id="Saath-and-Morosh"					onerror="reloadImage(this);" src="Cut Images/Saath-&amp;-Morosh.png"						width="222" height="212" /></div>
+		<div style="position: absolute; left: 1136px; top: 953px;">		<img id="Selhorys"							onerror="reloadImage(this);" src="Cut Images/Selhorys.png"								width="175" height="170" /></div>
+		<div style="position: absolute; left: 545px; top: 244px;">		<img id="Sheerpshead-Hills"					onerror="reloadImage(this);" src="Cut Images/Sheerpshead-Hills.png"						width="112" height="105" /></div>
+		<div style="position: absolute; left: 355px; top: 714px;">		<img id="Silverhill"						onerror="reloadImage(this);" src="Cut Images/Silverhill.png"								width="122" height="115" /></div>
+		<div style="position: absolute; left: 706px; top: 23px;">		<img id="Skagos"							onerror="reloadImage(this);" src="Cut Images/Skagos.png"									width="80" height="80" /></div>
+		<div style="position: absolute; left: 1581px; top: 1480px;">	<img id="Skull-Island-and-Ax-Isle"			onerror="reloadImage(this);" src="Cut Images/Skull-Island-&amp;-Ax-Isle.png"				width="137" height="101" /></div>
+		<div style="position: absolute; left: 1195px; top: 838px;">		<img id="South-West-Sarnor"					onerror="reloadImage(this);" src="Cut Images/South-West-Sarnor.png"						width="259" height="169" /></div>
+		<div style="position: absolute; left: 369px; top: 984px;">		<img id="Starfall"							onerror="reloadImage(this);" src="Cut Images/Starfall.png"								width="102" height="153" /></div>
+		<div style="position: absolute; left: 581px; top: 814px;">		<img id="Storms-End"						onerror="reloadImage(this);" src="Cut Images/Storm's-End.png"							width="177" height="125" /></div>
+		<div style="position: absolute; left: 584px; top: 1025px;">		<img id="Sunsprear"							onerror="reloadImage(this);" src="Cut Images/Sunsprear.png"								width="212" height="93" /></div>
+		<div style="position: absolute; left: 733px; top: 844px;">		<img id="Tarth"								onerror="reloadImage(this);" src="Cut Images/Tarth.png"									width="67" height="67" /></div>
+		<div style="position: absolute; left: 238px; top: 1078px;">		<img id="The-Arbor"							onerror="reloadImage(this);" src="Cut Images/The-Arbor.png"								width="66" height="66" /></div>
+		<div style="position: absolute; left: 1156px; top: 567px;">		<img id="The-Axe"							onerror="reloadImage(this);" src="Cut Images/The-Axe.png"								width="62" height="94" /></div>
+		<div style="position: absolute; left: 851px; top: 949px;">		<img id="The-Disputed-Lands"				onerror="reloadImage(this);" src="Cut Images/The-Disputed-Lands.png"						width="202" height="159" /></div>
+		<div style="position: absolute; left: 565px; top: 174px;">		<img id="The-Dreadfort"						onerror="reloadImage(this);" src="Cut Images/The-Dreadfort.png"							width="130" height="95" /></div>
+		<div style="position: absolute; left: 547px; top: 551px;">		<img id="The-Eyrie"							onerror="reloadImage(this);" src="Cut Images/The-Eyrie.png"								width="186" height="100" /></div>
+		<div style="position: absolute; left: 544px; top: 461px;">		<img id="The-Fingers"						onerror="reloadImage(this);" src="Cut Images/The-Fingers.png"							width="241" height="124" /></div>
+		<div style="position: absolute; left: 859px; top: 776px;">		<img id="The-Flatlands"						onerror="reloadImage(this);" src="Cut Images/The-Flatlands.png"							width="145" height="176" /></div>
+		<div style="position: absolute; left: 411px; top: 396px;">		<img id="The-Neck"							onerror="reloadImage(this);" src="Cut Images/The-Neck.png"								width="168" height="149" /></div>
+		<div style="position: absolute; left: 1045px; top: 1002px;">	<img id="The-Orange-Shore"					onerror="reloadImage(this);" src="Cut Images/The-Orange-Shore.png"						width="154" height="155" /></div>
+		<div style="position: absolute; left: 406px; top: 970px;">		<img id="The-Princes-Pass"					onerror="reloadImage(this);" src="Cut Images/The-Prince's-Pass.png"						width="198" height="178" /></div>
+		<div style="position: absolute; left: 1931px; top: 962px;">		<img id="The-Red-Waste"						onerror="reloadImage(this);" src="Cut Images/The-Red-Waste.png"							width="232" height="171" /></div>
+		<div style="position: absolute; left: 234px; top: 205px;">		<img id="The-Rills"							onerror="reloadImage(this);" src="Cut Images/The-Rills.png"								width="224" height="220" /></div>
+		<div style="position: absolute; left: 395px; top: 737px;">		<img id="The-Roseroad"						onerror="reloadImage(this);" src="Cut Images/The-Roseroad.png"							width="187" height="193" /></div>
+		<div style="position: absolute; left: 706px; top: 1541px;">		<img id="The-Singing-Stones"				onerror="reloadImage(this);" src="Cut Images/The-Singing-Stones.png"						width="107" height="124" /></div>
+		<div style="position: absolute; left: 978px; top: 753px;">		<img id="The-Sorrows"						onerror="reloadImage(this);" src="Cut Images/The-Sorrows.png"							width="225" height="270" /></div>
+		<div style="position: absolute; left: 398px; top: 494px;">		<img id="The-Twins"							onerror="reloadImage(this);" src="Cut Images/The-Twins.png"								width="172" height="151" /></div>
+		<div style="position: absolute; left: 603px; top: 437px;">		<img id="Three-Sisters"						onerror="reloadImage(this);" src="Cut Images/Three-Sisters.png"							width="41" height="41" /></div>
+		<div style="position: absolute; left: 1447px; top: 991px;">		<img id="Tolos-and-Bhorash"					onerror="reloadImage(this);" src="Cut Images/Tolos-&amp;-Bhorash.png"					width="258" height="146" /></div>
+		<div style="position: absolute; left: 804px; top: 922px;">		<img id="Tyrosh"							onerror="reloadImage(this);" src="Cut Images/Tyrosh.png"									width="67" height="67" /></div>
+		<div style="position: absolute; left: 911px; top: 620px;">		<img id="Upper-Rhoyne"						onerror="reloadImage(this);" src="Cut Images/Upper-Rhoyne.png"							width="128" height="151" /></div>
+		<div style="position: absolute; left: 1582px; top: 786px;">		<img id="Vaes-Diaf"							onerror="reloadImage(this);" src="Cut Images/Vaes-Diaf.png"								width="337" height="226" /></div>
+		<div style="position: absolute; left: 1889px; top: 559px;">		<img id="Vaes-Dothrak"						onerror="reloadImage(this);" src="Cut Images/Vaes-Dothrak.png"							width="266" height="279" /></div>
+		<div style="position: absolute; left: 1902px; top: 811px;">		<img id="Vaes-Efe-and-Vaes-Jini"			onerror="reloadImage(this);" src="Cut Images/Vaes-Efe-&amp;-Vaes-Jini.png"				width="229" height="165" /></div>
+		<div style="position: absolute; left: 1277px; top: 705px;">		<img id="Vaes-Khadokh"						onerror="reloadImage(this);" src="Cut Images/Vaes-Khadokh.png"							width="168" height="155" /></div>
+		<div style="position: absolute; left: 1372px; top: 766px;">		<img id="Vaes-Khewo"						onerror="reloadImage(this);" src="Cut Images/Vaes-Khewo.png"								width="266" height="205" /></div>
+		<div style="position: absolute; left: 1668px; top: 516px;">		<img id="Vaes-Leisi"						onerror="reloadImage(this);" src="Cut Images/Vaes-Leisi.png"								width="301" height="167" /></div>
+		<div style="position: absolute; left: 1615px; top: 652px;">		<img id="Vaes-Leqse-and-Yalli-Qamayi"		onerror="reloadImage(this);" src="Cut Images/Vaes-Leqse-&amp;-Yalli-Qamayi.png"			width="294" height="199" /></div>
+		<div style="position: absolute; left: 2016px; top: 1110px;">	<img id="Vaes-Qosar"						onerror="reloadImage(this);" src="Cut Images/Vaes-Qosar.png"								width="153" height="188" /></div>
+		<div style="position: absolute; left: 1880px; top: 1122px;">	<img id="Vaes-Shirosi-and-Vaes-Tolorro"		onerror="reloadImage(this);" src="Cut Images/Vaes-Shirosi-&amp;-Vaes-Tolorro.png"		width="179" height="164" /></div>
+		<div style="position: absolute; left: 517px; top: 1016px;">		<img id="Vaith"								onerror="reloadImage(this);" src="Cut Images/Vaith.png"									width="217" height="132" /></div>
+		<div style="position: absolute; left: 1309px; top: 1257px;">	<img id="Valyria"							onerror="reloadImage(this);" src="Cut Images/Valyria.png"								width="102" height="181" /></div>
+		<div style="position: absolute; left: 765px; top: 1390px;">		<img id="Walano"							onerror="reloadImage(this);" src="Cut Images/Walano.png"									width="188" height="151" /></div>
+		<div style="position: absolute; left: 891px; top: 580px;">		<img id="Western-Hills"						onerror="reloadImage(this);" src="Cut Images/Western-Hills.png"							width="130" height="89" /></div>
+		<div style="position: absolute; left: 1234px; top: 1245px;">	<img id="Western-Ruined-City"				onerror="reloadImage(this);" src="Cut Images/Western-Ruined-City.png"					width="107" height="164" /></div>
+		<div style="position: absolute; left: 557px; top: 325px;">		<img id="White-Harbor"						onerror="reloadImage(this);" src="Cut Images/White-Harbor.png"							width="129" height="113" /></div>
+		<div style="position: absolute; left: 635px; top: 247px;">		<img id="Widows-Watch"						onerror="reloadImage(this);" src="Cut Images/Widow's-Watch.png"							width="141" height="131" /></div>
+		<div style="position: absolute; left: 482px; top: 219px;">		<img id="Winterfell"						onerror="reloadImage(this);" src="Cut Images/Winterfell.png"								width="90" height="104" /></div>
+		<div style="position: absolute; left: 304px; top: 155px;">		<img id="Wolfswood"							onerror="reloadImage(this);" src="Cut Images/Wolfswood.png"								width="201" height="146" /></div>
+		<div style="position: absolute; left: 253px; top: 553px;">		<img id="Wyk"								onerror="reloadImage(this);" src="Cut Images/Wyk.png"									width="81" height="58" /></div>
+		<div style="position: absolute; left: 1889px; top: 1490px;">	<img id="Wyvern-Point"						onerror="reloadImage(this);" src="Cut Images/Wyvern-Point.png"							width="147" height="200" /></div>
+		<div style="position: absolute; left: 1624px; top: 992px;">		<img id="Yunkai"							onerror="reloadImage(this);" src="Cut Images/Yunkai.png"									width="162" height="147" /></div>
+		<div style="position: absolute; left: 1418px; top: 1550px;">	<img id="Zamettar-and-Yeen"					onerror="reloadImage(this);" src="Cut Images/Zamettar-&amp;-Yeen.png"					width="313" height="230" /></div>
+	</div>
+
+</body>
+
+</html>

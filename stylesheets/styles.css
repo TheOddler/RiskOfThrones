@@ -12,6 +12,12 @@ body {
     margin-right: auto;
 }
 
+.donation_wrapper {
+    position: fixed;
+    top: 0px;
+    right: 5px;
+}
+
 header, footer {
     width:220px;
     float:left;

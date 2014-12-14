@@ -2,7 +2,7 @@
 
 body {
     font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color:#777;
+    color:#555555;
     font-weight:300;
     max-width: 920px;
 
@@ -96,7 +96,11 @@ strong {
     font-weight:700;
 }
 
-.map {
+.full_width {
+    width:100%;
+}
+
+.full_width_max {
     max-width:100%;
 }
 
@@ -107,6 +111,23 @@ strong {
 }
 .menu li{
     display: list-item;
+}
+
+.scale_43 {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.scale_43 #dummy {
+    padding-top: 75%; /* 4:3 aspect ratio */
+}
+.scale_43 #element {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: silver; /* show me! */
 }
 
 /* For small screens */

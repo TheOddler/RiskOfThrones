@@ -100,6 +100,15 @@ strong {
     max-width:100%;
 }
 
+.menu ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.menu li{
+    display: list-item;
+}
+
 /* For small screens */
 @media print, screen and (max-width: 720px) {
 
@@ -120,11 +129,19 @@ strong {
     section {
         border:1px solid #e5e5e5;
         border-width:1px 0;
-        padding:20px 0;
+        padding:10px 0;
         margin:0 0 20px;
     }
 
     header a small {
         display:inline;
+    }
+
+    .menu ul{
+    }
+
+    .menu li{
+        padding-right: 15px;
+        display: inline;
     }
 }

@@ -14,8 +14,16 @@ body {
 
 .donation_wrapper {
     position: fixed;
-    top: 0px;
-    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.donation_wrapper ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.donation_wrapper li{
+    display: list-item;
 }
 
 header, footer {
@@ -144,9 +152,21 @@ strong {
         width:auto;
     }
 
+    .donation_wrapper {
+        position: fixed;
+        top: 0;
+        right: 5px;
+        transform: translateY(0);
+    }
+
+    .donation_wrapper li{
+        display: inline-table;
+    }
+
     .section_wrapper {
         margin-left: 0px;
     }
+
     section {
         border:1px solid #e5e5e5;
         border-width:1px 0;
@@ -158,11 +178,9 @@ strong {
         display:inline;
     }
 
-    .menu ul{
-    }
-
     .menu li{
         padding-right: 15px;
         display: inline;
     }
+
 }

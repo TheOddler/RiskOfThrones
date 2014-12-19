@@ -104,20 +104,16 @@ strong {
     font-weight:700;
 }
 
-.full_width {
+img {
     width:100%;
 }
 
-.full_width_max {
-    max-width:100%;
-}
-
-.menu ul{
+header ul{
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.menu li{
+header li{
     display: list-item;
 }
 
@@ -137,6 +133,8 @@ strong {
     right: 0;
     background-color: silver; /* show me! */
 }
+
+
 
 /* For small screens */
 @media print, screen and (max-width: 720px) {
@@ -178,7 +176,7 @@ strong {
         display:inline;
     }
 
-    .menu li{
+    header li{
         padding-right: 15px;
         display: inline;
     }

@@ -31,7 +31,13 @@ First and foremost let's take a peek at what the board looks like in action. You
 
 **Download the high-resolution board as [png](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing) or [pdf](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing).**
 
-## What you'll will need
+
+# More images
+
+{% include flickr_slideshow.html %}
+
+
+# What you'll will need
 
 **The board.** I had mine printed at a local printer's as a poster. They wanted it as a pdf, that's why I included it. I suggest to have it printed on high quality paper to prevent rips, though I didn't have it laminated. I had it printed on a 1.2m by 1.6m poster, maco silk, [here](https://www.zwartopwit.be/) for about 30 euros.
 
@@ -82,12 +88,6 @@ I bought tokens in 3 sizes from a local board-game-parts store. If you're from B
 # Suggestions
 
 If you played on my map and have any suggestions about the layout or rules, please [send me an email](mailto:pablo.bollansee+RiskOfThrones@gmail.com?Subject=Risk of Thrones Suggestion). I promise to read everything you send me and will see if I can use your suggestions to improve the rules. Feel free to use your own house rules for playing Risk of Thrones and modify the rules I suggest to your heart's content. After all, having fun and testing the strength of your friendships is what this game is all about.
-
-
-
-# More images
-
-{% include flickr_slideshow.html %}
 
 </section>
 </div>

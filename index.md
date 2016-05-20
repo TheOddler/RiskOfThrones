@@ -11,7 +11,8 @@ title: Risk of Thrones
 
 ### Are you willing to take the risk of thrones?
 
-* [Download board](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)
+* [Download board (PNG)](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)
+* [Download board (PDF)](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)
 * [Companion app](companion/)
 * [Custom rules](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)
 * [Send me an email](mailto:pablo.bollansee+RiskOfThrones@gmail.com?Subject=Risk of Thrones)
@@ -29,8 +30,11 @@ First and foremost let's take a peek at what the board looks like in action. You
 
 ![Map Previes](images/as_board_overview.jpg)
 
-**Download the high-resolution board as [png](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing) or [pdf](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing).**
+# Download
 
+You can **[download the full-resolution png image here](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)**.
+
+Most printing shops however want the document as a PDF, so you can **[download the PDF version here](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)**.
 
 # More images
 
@@ -39,14 +43,13 @@ First and foremost let's take a peek at what the board looks like in action. You
 
 # What you'll will need
 
-**The board.** I had mine printed at a local printer's as a poster. They wanted it as a pdf, that's why I included it. I suggest to have it printed on high quality paper to prevent rips, though I didn't have it laminated. I had it printed on a 1.2m by 1.6m poster, maco silk, [here](https://www.zwartopwit.be/) for about 30 euros.
+**The board.** You can download it above. I had mine printed at a local printer's as a poster. They wanted it as a pdf, that's why I included it. I suggest to have it printed on high quality paper to prevent rips, though I didn't have it laminated. I had it printed on a 1.2m by 1.6m poster, maco silk, [here](https://www.zwartopwit.be/) for about 30 euros.
 
 **Tokens.** You'll have to find something to use as units, I bought a bunch of plastic circles in a [local board game shop](http://www.wingames.be/). This cost me about 50 euros for 8 different colours. I got 100 tokens per colour and 3 different sizes (more about this below).
 
-**Special Cards.** I just used the 'Special Cards' from an old Risk game I had lying around.
-
 **Dice.** I bought a few extra at that same board game shop, though you'll probably have enough lying around at home.
 
+**Special Cards.** I just used the 'Special Cards' from an old Risk game I had lying around.
 
 
 # Companion App
@@ -105,7 +108,3 @@ Hosted on GitHub Pages - Theme based on Minimal by [orderedlist](https://github.
 </small>
 
 </footer>
-
-
-
-{% include donation_buttons.html %}

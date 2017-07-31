@@ -41,7 +41,7 @@ Most printing shops however want the document as a PDF, so you can **[download t
 {% include flickr_slideshow.html %}
 
 
-# What you'll will need
+# What you will need
 
 **The board.** You can download it above. I had mine printed at a local printer's as a poster. They wanted it as a pdf, that's why I included it. I suggest to have it printed on high quality paper to prevent rips, though I didn't have it laminated. I had it printed on a 1.2m by 1.6m poster, maco silk, [here](https://www.zwartopwit.be/) for about 30 euros.
 

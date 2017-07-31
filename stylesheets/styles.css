@@ -115,23 +115,6 @@ header li{
     display: list-item;
 }
 
-.scale_43 {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-}
-.scale_43 #dummy {
-    padding-top: 75%; /* 4:3 aspect ratio */
-}
-.scale_43 #element {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: silver; /* show me! */
-}
-
 
 
 /* For small screens */

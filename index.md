@@ -38,7 +38,7 @@ Most printing shops however want the document as a PDF, so you can **[download t
 
 # More images
 
-{% include flickr_slideshow.html %}
+{% include flickr_album.html %}
 
 
 # What you will need

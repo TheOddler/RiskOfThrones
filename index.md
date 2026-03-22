@@ -9,10 +9,13 @@ title: Risk of Thrones
 
 ### Are you willing to take the risk of thrones?
 
-* [Download board (PNG)](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)
-* [Download board (PDF)](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)
+* [Download board (PNG)](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/riskofthrones_print.png)
+* [Download board (PNG, alt)](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)
+* [Download board (PDF)](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/riskofthrones_print.pdf)
+* [Download board (PDF, alt)](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)
 * [Companion app](companion/)
-* [Custom rules](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)
+* [Custom rules](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/Risk%20of%20Thrones%20Rules.xlsx)
+* [Custom rules (alt)](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)
 * [Send me an email](mailto:pablo.bollansee+RiskOfThrones@gmail.com?Subject=Risk of Thrones)
 
 </header>
@@ -30,9 +33,9 @@ First and foremost let's take a peek at what the board looks like in action. You
 
 # Download
 
-You can **[download the full-resolution png image here](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)**.
+You can **[download the full-resolution png image here](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/riskofthrones_print.png)** ([alt](https://drive.google.com/file/d/0B8-DllFwoZXscnMyTXJvNk1oZzQ/view?usp=sharing)).
 
-Most printing shops however want the document as a PDF, so you can **[download the PDF version here](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)**.
+Most printing shops however want the document as a PDF, so you can **[download the PDF version here](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/riskofthrones_print.pdf)** ([alt](https://drive.google.com/file/d/0B8-DllFwoZXseTJsamF3aWppajQ/view?usp=sharing)).
 
 # More images
 
@@ -62,7 +65,7 @@ The companion app can be found [here](companion/).
 
 Although Risk of Thrones uses mostly the same rules as the original Risk game, there are some additions. All rules not mentioned here are kept unchanged. Most households will have their own house-rules, and I encourage you to use those.
 
-A sheet with all custom rules can be found [here](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0), more detailed information about each section follows.
+A sheet with all custom rules can be found [here](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/Risk%20of%20Thrones%20Rules.xlsx) ([alt](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)), more detailed information about each section follows.
 
 ## Attack/Defence
 
@@ -70,7 +73,7 @@ Some rules involve attacking or defending, these were balanced on using 3 attack
 
 ## Lands
 
-At the beginning of each turn you get a number of units based on the amount of lands you control. This number is calculated by: max( 3, floor( #lands / 3 ) ). Some often used values are given in the [rules sheet](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0).
+At the beginning of each turn you get a number of units based on the amount of lands you control. This number is calculated by: max( 3, floor( #lands / 3 ) ). Some often used values are given in the [rules sheet](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/Risk%20of%20Thrones%20Rules.xlsx) ([alt](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)).
 
 ## Regions
 
@@ -82,7 +85,7 @@ If the wording of these rules isn't clear you can always send me an email and I'
 
 ## Tokens
 
-I bought tokens in 3 sizes from a local board-game-parts store. If you're from Belgium check out [WinGames](http://www.wingames.be/), I bought the cheapest 'fiches' of 12mm, 16mm and 22mm. I bought 8 different colours. These were still the most expensive part of the game. An indication of the amounts of each you will need is given in the [rules sheet](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0), as well as the size of the army they represent.
+I bought tokens in 3 sizes from a local board-game-parts store. If you're from Belgium check out [WinGames](http://www.wingames.be/), I bought the cheapest 'fiches' of 12mm, 16mm and 22mm. I bought 8 different colours. These were still the most expensive part of the game. An indication of the amounts of each you will need is given in the [rules sheet](https://archive.org/download/riskofthrones/Risk%20of%20Thrones/Risk%20of%20Thrones%20Rules.xlsx) ([alt](https://docs.google.com/spreadsheets/d/1QuzX1nsdQnzBMiFesjz8cuc44RaNeqp5e4vN8ug8PQ0/edit#gid=0)), as well as the size of the army they represent.
 
 
 

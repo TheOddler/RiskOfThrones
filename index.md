@@ -3,8 +3,6 @@ layout: default
 title: Risk of Thrones
 ---
 
-{% include google_analytics.html %}
-
 <header markdown="1">
 
 # Risk of Thrones

@@ -100,9 +100,9 @@ If you played on my map and have any suggestions about the layout or rules, plea
 
 <footer markdown="1">
 
-[View the project on GitHub](https://github.com/TheOddler/RiskOfThrones)
+View the project on [CodeBerg](https://codeberg.org/TheOddler/RiskOfThrones) or [GitHub](https://github.com/TheOddler/RiskOfThrones)
 
-By [Pablo Bollansée](http://theoddler.github.io/)
+By [Pablo Bollansée](https://www.pabloproductions.be/)
 
 <small markdown="1">
 Hosted on GitHub Pages - Theme based on Minimal by [orderedlist](https://github.com/orderedlist)
